@@ -1,6 +1,6 @@
 # IDI1015_Fase2
 ### Integrantes: Diego González, Constanza Morales, Fernanda Vargas.
-#### Curso: Lenguaje Visual
+#### Curso: Pensamiento Visual
 
 #### Sigla: IDI1015
 
