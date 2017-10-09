@@ -1,32 +1,25 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
-  <meta charset="UTF-8">
-  
-  <title>Terremotos</title>
+	<title>Mapa</title>
+	<link rel="stylesheet" type="text/css" href="css/mapa.css">
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
 
-  <link rel="stylesheet" type="text/css" href="css/mapa.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet"> 
 
 </head>
-
 <body>
-
-
  <div id="map"></div>
+ <script type="text/javascript" src="d3/d3.min.js"></script>
+ <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+ <script type="text/javascript" src="js/dataset.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+ <script type="text/javascript" src="js/mapa.js"></script>
 
-  <!-- JS -->
-  <!-- D3 -->
-  <script type="text/javascript" src="d3/d3.min.js"></script>
-  <!-- Leaflet -->
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
-  <!-- jQuery -->
-  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-  <!-- Nuestro dataset -->
-  <script type="text/javascript" src="js/dataset.js"></script>
-  <!-- El mapa -->
-  <script type="text/javascript" src="js/mapa.js"></script>
+<div id="slider-container">
+<input type="range" min="1960" max="2016" step="1" id="slider" value="1960"
+onchange="update(this.value)">
+</div>
+
 
 </body>
 </html>
