@@ -1,0 +1,93 @@
+
+body {
+  background: black;
+}
+
+#logo {
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px;
+  text-align:center;
+  margin-top: 22%;
+  animation: modal 40s 0.5s backwards;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+
+}
+
+span {
+  animation: modal 23s 0.5s backwards;
+  visibility: hidden;
+  opacity: 0;
+  color: white;
+}
+
+h3{
+  font-family: 'Roboto', sans-serif;
+  left:28%;
+  animation: modal 20s 25s backwards;
+  visibility: hidden;
+  opacity: 0;
+  color: white;
+  position: absolute;
+}
+
+@keyframes modal {
+    100% {
+        visibility: visible;
+        opacity: 1;
+       
+    }
+}
+
+#audifonos {
+  color:white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 8px;
+  text-align:center;
+  opacity:0.3;
+  margin-top:22%;
+}
+
+#segundo-texto {
+  text-align: center;
+  margin-top: 21%;
+}
+
+#mapa{
+  color:white;
+  position: absolute;
+  display: block;
+  width: 1200;
+  height: 1000;
+}
+
+/*Botón*/
+#cerrar {
+    display: none;
+}
+
+#cerrar + label {
+    position: absolute;
+    color: #fff;
+    font-size: 22px;
+    z-index: 5;
+    background: green;
+    height: 40px;
+    width: 150px;
+    line-height: 35px;
+    border-radius: 10%;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    right: 45.5%;
+    top: 75%;
+    cursor: pointer;
+    
+    animation: modal 0.2s 30s forwards;
+    visibility: hidden;
+    opacity: 0;
+}
+
+#cerrar:checked + label, #cerrar:checked ~ .introduccion {
+    display: none;
+}
