@@ -10,7 +10,7 @@ $(document).ready(function(){
 		});
 		$('#logo').trigger('startRumble');
 
-		setTimeout(addone, 2000);
+		setTimeout(addone, 6000);
 	}
 	addone();
 });
