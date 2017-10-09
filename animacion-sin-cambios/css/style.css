@@ -86,7 +86,3 @@ h3{
     visibility: hidden;
     opacity: 0;
 }
-
-#cerrar:checked + label, #cerrar:checked ~ .introduccion {
-    display: none;
-}
