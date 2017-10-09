@@ -58,11 +58,11 @@ h3{
 }
 
 #map{
-	color:white;
-	position: absolute;
-	display: block;
-	width: 1200;
-	height: 1000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 /*Botón*/
