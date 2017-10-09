@@ -16,10 +16,3 @@ $(document).ready(function(){
 });
 
 
-$(document).ready(function(){
-      $('#cerrar').on('click',function(){
-        $('#mapa').fadeToggle(3000);
-
-      });
-     });
-

@@ -63,20 +63,18 @@ h3{
 }
 
 /*Botón*/
-#cerrar {
-    display: none;
-}
 
-#cerrar + label {
+.button {
     position: absolute;
     color: #fff;
+    border: none;
     font-size: 16px;
+    text-decoration: none;
     z-index: 5;
     background: #0D8ED5;
-    height: 40px;
-    width: 150px;
-    padding: 10px 12px;
-    line-height: 35px;
+    margin: 4px 2px;
+    padding: 20px;
+    display: inline-block;
     border-radius: 12px;
     font-family: 'Roboto', sans-serif;
     text-align: center;

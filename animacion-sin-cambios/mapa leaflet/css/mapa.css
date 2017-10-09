@@ -1,0 +1,10 @@
+#map{
+	position: relative;
+	height: 500px;
+}
+
+#slider{
+	margin: auto;
+	width: 1000px;
+	align-self: center;
+}
