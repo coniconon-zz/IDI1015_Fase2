@@ -15,6 +15,8 @@ display_by_year(1960);
 function onEachFeature(feature, layer) {
   var content = "<p>DATE <br/>"
           + feature.properties.DATE +
+          "<br/><br/>LOCATION<br/>" +
+          feature.properties.LOCATION_NAME +
             "<br/><br/>MAGNITUDE<br/>" +
             feature.properties.MAGNITUDE +
             "<br/><br/>FOCAL DEPTH<br/>" +
