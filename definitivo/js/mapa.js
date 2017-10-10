@@ -4,7 +4,7 @@ var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.p
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>contributors, &copy; <a href="http://carto.com/attributions">CARTO</a>'
     }).addTo(map);
 
-var scale = d3.scaleLinear().domain([0, 316000]).range([5,15]);
+var scale = d3.scaleLinear().domain([0, 316000]).range([5,20]);
 var color = d3.scaleLinear().domain([1.6,9.5])
       .interpolate(d3.interpolateHcl)
       .range([d3.rgb("#fffc33"), d3.rgb('#FF2700')]);
@@ -74,7 +74,6 @@ function clear2(){
 function update(val){
   console.log(val);
   document.getElementById("year-value").innerHTML = val;
-  clear();
   display_by_year(val);
 
 
