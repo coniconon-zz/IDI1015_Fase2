@@ -1,11 +1,13 @@
 #map{
 	position: relative;
-	height: 500px;
+	height: 400px;
 }
 
+#slider-container{
+margin: auto;
+
+}
 #slider{
-	margin: auto;
 	width: 1000px;
-	position: relative;
-	left: auto;
+
 }
