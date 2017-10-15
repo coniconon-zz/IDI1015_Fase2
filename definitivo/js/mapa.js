@@ -32,7 +32,9 @@ function onEachFeature(feature, layer) {
   layer.bindPopup(content);
 }
 
-
+function onClick(c){
+  console.log(this.feature.properties);
+}
 
 function display_by_year(year){
         var point =  L.geoJSON(data, {
@@ -43,11 +45,12 @@ function display_by_year(year){
           return L.circleMarker(latlng, {radius:
             scale(feature.properties.DEATHS),
             stroke: false, fillColor: color(feature.properties.MAGNITUDE),
-            fillOpacity: 0.8});
+            fillOpacity: 0.8}).on('click', onClick);
         }
         else {
           return L.circleMarker(latlng, {radius: 4, stroke: false,
-            fillColor: color(feature.properties.MAGNITUDE), fillOpacity: 0.8});
+            fillColor: color(feature.properties.MAGNITUDE), fillOpacity: 0.8})
+            .on('click', onClick);
         }};
      }, onEachFeature: onEachFeature
    }).addTo(map);
@@ -55,43 +58,29 @@ function display_by_year(year){
 
    layers_array.push(point);
    if (layers_array.length > 1){
-     console.log(layers_array);
+
      map.removeLayer(layers_array[layers_array.length - 2]);
    }
 }
 
-function clear() {
-  L.geoJSON(data,{
-    onEachFeature : function (feature, layer){
-      console.log(layer.latlng);
-    }});
-  }
-function clear2(year){
-  L.geoJSON(data, {
-          pointToLayer: function (feature, latlng) {
-          if (feature.properties.YEAR != year){
-            if (feature.properties.DEATHS != "sin dato")
-            {
-            return L.circleMarker(latlng, {radius:
-              scale(feature.properties.DEATHS),
-              stroke: false, fillColor: color(feature.properties.MAGNITUDE),
-              fillOpacity: 0.8});
-          }
-          else {
-            return L.circleMarker(latlng, {radius: 4, stroke: false,
-              fillColor: color(feature.properties.MAGNITUDE), fillOpacity: 0.8});
-          }};
-       }, onEachFeature: onEachFeature
-
-     }).removeFrom(map);
-  }
-
-
 function update(val){
-  // clear(val)
-  console.log(val);
   document.getElementById("year-value").innerHTML = val;
   display_by_year(val);
-
-
 }
+
+// define a lookup for what text should be displayed for each value in your range
+var rangeValues =
+{
+    "1960":   "1960",
+    "1965":   "1965",
+    "1970":   "1970",
+    "1975":   "1975"
+};
+
+
+$(function(){
+$('#rangeText').text(rangeValues[$('#slider').val()]);
+$('#slider').on('input change', function () {
+    $('#rangeText').text(rangeValues[$(this).val()]);
+    });
+});

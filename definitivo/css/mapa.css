@@ -1,13 +1,26 @@
 #map{
 	position: relative;
 	height: 400px;
+
 }
 
 #slider-container{
 margin: auto;
+width: 1000px;
 
 }
 #slider{
 	width: 1000px;
 
+}
+
+#slider-container{
+	position: relative;
+	top: 20px;
+}
+
+.range-labels {
+  margin: 18px -41px 0;
+  padding: 0;
+  list-style: none;
 }

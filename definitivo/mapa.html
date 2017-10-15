@@ -16,8 +16,13 @@
  <script type="text/javascript" src="js/mapa.js"></script>
 
 <div id="slider-container">
-<input type="range" min="1960" max="2016" step="1" id="slider" value="1960"
-onchange="update(this.value)">
+<input type="range" id="slider" name="slider" min="1960" max="2016" step="1" value="1960"
+onchange="update(this.value)"><label id="rangeText" />
+
+
+
+
+
 </div>
 <br /><br />
 YEAR = <span id="year-value">1960</span>

@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-df = pd.read_json("dataset_final_final.json")
+df = pd.read_json("dataset_final.json")
 
 # se parte por el head
 output = """{
