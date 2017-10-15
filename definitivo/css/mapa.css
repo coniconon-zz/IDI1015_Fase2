@@ -1,26 +1,22 @@
-#map{
-	position: relative;
-	height: 400px;
-
+body {
+  background: black;
 }
 
-#slider-container{
-margin: auto;
-width: 1000px;
-
-}
 #slider{
+	margin: auto;
 	width: 1000px;
-
-}
-
-#slider-container{
 	position: relative;
-	top: 20px;
+	left: auto;
+	z-index: 4;
 }
 
-.range-labels {
-  margin: 18px -41px 0;
-  padding: 0;
-  list-style: none;
+
+#map{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 70%;
+  height: auto;
 }
