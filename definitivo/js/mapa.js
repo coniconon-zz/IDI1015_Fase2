@@ -1,5 +1,5 @@
 var layers_array = [];
-
+var countries = [];
 
 var map = L.map('map').setView([-21.351441,-71.7764874], 5);
 
@@ -33,7 +33,16 @@ function onEachFeature(feature, layer) {
 }
 
 function onClick(c){
+  countries.push(this.feature.properties.COUNTRY)
+  if (countries.length >=2) {
+    display_pib_chart(countries[countries.length - 1],
+      countries[countries.length - 2])
+  };
   console.log(this.feature.properties);
+}
+
+function mouseOver(c){
+  this.openPopup();
 }
 
 function display_by_year(year){
@@ -45,12 +54,12 @@ function display_by_year(year){
           return L.circleMarker(latlng, {radius:
             scale(feature.properties.DEATHS),
             stroke: false, fillColor: color(feature.properties.MAGNITUDE),
-            fillOpacity: 0.8}).on('click', onClick);
+            fillOpacity: 0.8}).on('click', onClick).on("mouseover", mouseOver);
         }
         else {
           return L.circleMarker(latlng, {radius: 4, stroke: false,
             fillColor: color(feature.properties.MAGNITUDE), fillOpacity: 0.8})
-            .on('click', onClick);
+            .on('click', onClick).on("mouseover", mouseOver);
         }};
      }, onEachFeature: onEachFeature
    }).addTo(map);
@@ -84,3 +93,75 @@ $('#slider').on('input change', function () {
     $('#rangeText').text(rangeValues[$(this).val()]);
     });
 });
+
+function extraer_pib(country){
+  var l = [];
+for (var i in data_pib){
+  var upper = data_pib[i]["Country Name"].toUpperCase();
+  if (upper == country) {
+    for (j = 1960; j <= 2016; j++) {
+      l.push(data_pib[i][j])
+    }
+  };
+}
+return l
+}
+function display_pib_chart(country1,country2){
+  console.log(extraer_pib(country1));
+  var myConfig = {
+    "background-color":"#E1EAEC #ECF2F4",
+    "graphset":[
+        {
+            "background-color":"black",
+            "type":"pop-pyramid",
+            "options":{
+                "aspect":"area"
+            },
+            "title": {
+              "text": "PIB per capita por anno"
+            },
+            "plot":{
+                "stacked":true
+            },
+            "scale-x":{
+                "item":{
+                    "text-align":"middle"
+                },
+                "values":"1960:2016"
+            },
+            "scale-y":{
+                "values":"40:102831.32148281099:100"
+            },
+            "series":[
+                {
+                    "data-side":1,
+                    "text": country1,
+                    "background-color":"#007DF0 #0055A4",
+                    "line-color":"#0055a4",
+                    "marker":{
+                        "visible":false
+                    },
+                    "values": extraer_pib(country1)
+                },
+                {
+                    "data-side":2,
+                    "text": country2,
+                    "background-color":"#94090D #D40D12",
+                    "line-color":"#94090D",
+                    "marker":{
+                        "visible":false
+                    },
+                    "values":extraer_pib(country2)
+                }
+            ]
+        }
+    ]
+};
+
+zingchart.render({
+  id : 'PIB_Chart',
+  data : myConfig,
+  height: "600px",
+  width: "100%"
+});
+}
