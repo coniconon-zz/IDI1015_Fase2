@@ -5,7 +5,7 @@
 
 #map{
 	position: relative;
-	height: 400px;
+	height: 100%;
 	width: 60%;
 	float: left;
 }
@@ -19,14 +19,13 @@ height: 600px;
 #pop_chart{
 	width: 40%;
 	height: 600px;
-	background: red;
 	float: right;
 }
 
 #slider-container{
 position: absolute;
-width: 715.19px;
-top: 410px;
+width: 706.19px;
+top: 605px;
 float: left;
 }
 #slider{

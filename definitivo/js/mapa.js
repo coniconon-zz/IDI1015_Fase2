@@ -37,6 +37,8 @@ function onClick(c){
   if (countries.length >=2) {
     display_pib_chart(countries[countries.length - 1],
       countries[countries.length - 2])
+    display_pop_chart(countries[countries.length - 1],
+      countries[countries.length - 2])
   };
   console.log(this.feature.properties);
 }
@@ -94,18 +96,7 @@ $('#slider').on('input change', function () {
     });
 });
 
-function extraer_pib(country){
-  var l = [];
-for (var i in data_pib){
-  var upper = data_pib[i]["Country Name"].toUpperCase();
-  if (upper == country) {
-    for (j = 1960; j <= 2016; j++) {
-      l.push(data_pib[i][j])
-    }
-  };
-}
-return l
-}
+
 function display_pib_chart(country1,country2){
   console.log(extraer_pib(country1));
   var myConfig = {
@@ -164,4 +155,52 @@ zingchart.render({
   height: "600px",
   width: "100%"
 });
+}
+
+function display_pop_chart(country1,country2){
+  var pop1 = extraer_poblacion(country1);
+  var pop2 = extraer_poblacion(country2);
+  var deaths1 = deaths_by_year(country1);
+  var deaths2 = deaths_by_year(country2);
+  var myConfig = {
+    type: "bar",
+    plot:{
+      stacked:true
+    },
+    "scale-x": {
+      "label":{
+        "text":"Izquierda: a, Derecha:b"
+      },
+      "values":"1960:2016"
+    },
+    series: [
+      {
+        values:pop1,
+        stack:1,
+
+      },
+      {
+        values:deaths1,
+        stack:1
+      },
+      {
+        values: pop2,
+        stack:2
+      },
+      {
+        values:deaths2,
+        stack:2
+      }
+    ]
+  };
+
+  zingchart.render({
+  	id : 'pop_chart',
+  	data : myConfig,
+  	height: "600px",
+  	width: "100%"
+  });
+
+
+
 }
