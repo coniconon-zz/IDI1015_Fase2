@@ -98,12 +98,11 @@ $('#slider').on('input change', function () {
 
 
 function display_pib_chart(country1,country2){
-  console.log(extraer_pib(country1));
   var myConfig = {
     "background-color":"#E1EAEC #ECF2F4",
     "graphset":[
         {
-            "background-color":"black",
+            "background-color":"#424242",
             "type":"pop-pyramid",
             "options":{
                 "aspect":"area"
@@ -162,45 +161,171 @@ function display_pop_chart(country1,country2){
   var pop2 = extraer_poblacion(country2);
   var deaths1 = deaths_by_year(country1);
   var deaths2 = deaths_by_year(country2);
+  var percent1 = [];
+  var percent2 = [];
+  for (var i in deaths1) {
+      percent1.push((deaths1[i]/(pop1[i]*1000))*100)
+      percent2.push((deaths2[i]/(pop2[i]*1000))*100)
+  }
+  console.log(percent1);
+  console.log(percent2);
   var myConfig = {
-    type: "bar",
-    plot:{
-      stacked:true
-    },
-    "scale-x": {
-      "label":{
-        "text":"Izquierda: a, Derecha:b"
-      },
-      "values":"1960:2016"
-    },
-    series: [
-      {
-        values:pop1,
-        stack:1,
+ 	"type" : "pop-pyramid",
+ 	"background-color" : "#424242",
+ 	"title" : {
+ 	  "text" : "Cantidad de muertos",
+ 	  "font-size" : "18px",
+ 	  "font-color" : "#DDD",
+ 	},
+ 	"subtitle" : {
+ 	  "text" : "Desde 1960-2016",
+ 	  "font-size" : "14px",
+ 	  "font-color" : "#999",
+ 	  "padding-top" : 0,
+ 	},
+ 	"tooltip" : {
+ 	  "visible" : false,
+ 	},
+ 	"legend" : {
+ 	  "item" : {
+ 	    "font-color" : "#FFF",
+ 	    "cursor": "pointer"
+ 	  },
+ 	  "background-color" : "#999 #777",
+ 	  "border-width" : "1px",
+ 	  "border-radius" : "3px",
+ 	  "border-color" : "#AAA",
+ 	  "offset-x" : 50,
+ 	  "offset-y" : 60,
+ 	  "align": "left",
+ 	  "z-index":9999
+ 	},
+ 	"scale-x" : {
+ 	  "values" : "1960:2016:1",
+ 	  "tick" : {
+ 	    "line-color" : "#CCC",
+ 	  },
+ 	  "minor-ticks" : 2,
+ 	  "minor-tick" : {
+ 	    "line-color" : "#999",
+ 	    "placement" : "outer",
+ 	  }
+ 	},
+ 	"scale-y" : {
+ 	  "values" : "0:20:0.00001",
+ 	  "guide" : {
+ 	    "line-color" : "#777",
+ 	  },
+ 	},
+ 	"crosshair-x" : {
+ 	  "line-width" : "1px",
+ 	  "line-color" : "#bdbdbd",
+ 	  "line-style": "dashed",
+ 	  "line-segment-size": 4,
+ 	  "line-gap-size":10,
+ 	  "shared" : true,
+ 	  "plot-label" : {
+ 	    "multiple" : true,
+ 	    "font-color":"#333",
+ 	    "text":"%t: %v%",
+ 	    "border-color" : "#666",
+ 	    "padding": 10,
+ 	    "font-size":14,
+ 	    "border-radius":5
+ 	  },
+ 	  "scaleLabel":{
+ 	    "background-color": "#EEE",
+ 	    "font-color" : "#333",
+ 	    "border-width" : "1px",
+ 	    "border-color" : "#000",
+ 	  },
+ 	},
+ 	"plot" : {
+ 	  "alpha-area" : 0.5,
+ 	  "line-width" : 1,
+ 	  "marker" : {
+ 	    "size" : 3,
+ 	    "border-color" : "#FFF",
+ 	    "border-width" : 1,
+ 	  },
+ 	  "hover-marker" : {
+ 	    "size" : 5,
+ 	  },
+ 	},
+ 	"series" : [
+		{
+			"data-side" : 1,
+			"text" : country1,
+		  "values" : percent1,
+		  "background-color" : "#69f0ae",
+		  "marker" : {
+		    "background-color" : "#64ffda",
+		    "border-color" : "#00bfa5",
+		  },
+		  "line-color" : "#00bfa5",
+		},
+		{
+		  "data-side" : 2,
+		  "text" : country2,
+			"values" : percent2,
+			"background-color" : "#7c4dff",
+			"marker" : {
+		    "background-color" : "#d500f9",
+		    "border-color" : "#aa00ff",
+		  },
+		  "line-color" : "#aa00ff",
+		},
+	],
+	"options" : {
+ 	  "side-1" : {
+ 	    "crosshair-x" : {
+ 	      "scale-label" : {
+ 	        "visible" : false,
+ 	      },
+ 	    },
+ 	    "scale-x" : {
+ 	      "visible" : false,
+ 	    },
+ 	    "scale-y" : {
+     	  "guide" : {
+     	    "items" : [
+     	      {
+     	        "background-color" : "#5F5F5F",
+     	      },
+     	      {
+     	        "background-color" : "#666",
+     	      },
+     	    ],
+     	  },
+ 	    },
+ 	  },
+ 	  "side-2" : {
+ 	    "subtitle" : {
+ 	      "visible" : false,
+ 	    },
+ 	    "scale-y" : {
+     	  "guide" : {
+     	    "items" : [
+     	      {
+     	        "background-color" : "#666",
+     	      },
+     	      {
+     	        "background-color" : "#5F5F5F",
+     	      },
+     	    ],
+     	  },
+ 	    },
+ 	  },
+ 	  "aspect" : "area",
+ 	},
+};
 
-      },
-      {
-        values:deaths1,
-        stack:1
-      },
-      {
-        values: pop2,
-        stack:2
-      },
-      {
-        values:deaths2,
-        stack:2
-      }
-    ]
-  };
-
-  zingchart.render({
-  	id : 'pop_chart',
-  	data : myConfig,
-  	height: "600px",
-  	width: "100%"
-  });
-
+zingchart.render({
+	id : 'pop_chart',
+	data : myConfig,
+	height: '600',
+	width: '100%'
+});
 
 
 }

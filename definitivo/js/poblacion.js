@@ -310,4 +310,3 @@ function deaths_by_year(country){
   }
 return values;
 }
-console.log(deaths_by_year("CHILE"));
