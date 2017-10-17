@@ -8,27 +8,27 @@ var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.p
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>contributors, &copy; <a href="http://carto.com/attributions">CARTO</a>'
     }).addTo(map);
 
-var scale = d3.scaleLinear().domain([0, 316000]).range([10,20]);
-var color = d3.scaleLinear().domain([4.9,9.5])
+var scale = d3.scaleLinear().domain([0, 316000]).range([13,20]);
+var color = d3.scaleLinear().domain([4,8])
       .interpolate(d3.interpolateHcl)
-      .range([d3.rgb("#fffc33"), d3.rgb('#FF2700')]);
+      .range([d3.rgb("#fffda8"), d3.rgb('#FF2700')]);
 
 
 display_by_year(1960);
 
 function onEachFeature(feature, layer) {
   var date = feature.properties.DATE.split(" ")
-  var content = "<p>DATE <br/>"
+  var content = "<p>FECHA<br/>"
           + date[0] +
-          "<br/><br/>LOCATION<br/>" +
+          "<br/><br/>LUGAR<br/>" +
           feature.properties.LOCATION_NAME +
-            "<br/><br/>MAGNITUDE<br/>" +
+            "<br/><br/>MAGNITUD<br/>" +
             feature.properties.MAGNITUDE +
-            "<br/><br/>FOCAL DEPTH<br/>" +
+            "<br/><br/>PROFUNDIDAD<br/>" +
             feature.properties.FOCAL_DEPTH +
-            "<br/><br/>DEATHS<br/>" +
+            "<br/><br/>MUERTES<br/>" +
             feature.properties.DEATHS +
-            "<br/><br/>DAMAGE<br/>" +
+            "<br/><br/>DAÑOS (millones) USD<br/>" +
             feature.properties.DAMAGE +
   "</p>";
   layer.bindPopup(content);
@@ -66,7 +66,7 @@ function display_by_year(year){
         else {
           return L.circleMarker(latlng, {radius: 4, stroke: false,
             fillColor: color(feature.properties.MAGNITUDE), fillOpacity: 0.8})
-            .on('click', onClick).on("mouseover", mouseOver);
+            .on('click', onClick);
         }};
      }, onEachFeature: onEachFeature
    }).addTo(map);
@@ -97,7 +97,7 @@ function display_pib_chart(country1,country2){
     "background-color":"#E1EAEC #ECF2F4",
     "graphset":[
         {
-            "background-color":"#424242",
+            "background-color":"#242426",
             "type":"pop-pyramid",
             "options":{
                 "aspect":"area"
@@ -208,16 +208,16 @@ function display_pop_chart(object1,object2){
       plot:{
         stacked:true
       },
-      "background-color":"#424242",
+      "background-color":"#242426",
       "title":{
-        "text": "Muertos por Terremoto/Poblacion",
+        "text": "Muertos por Terremoto/Población",
     "font-size" : "18px",
  	   "font-color" : "#DDD",
       },
       "scale-x": {
         "label":{
           "text":object1.COUNTRY +" , " +  object2.COUNTRY,
-          "font-size" : "18px",
+          "font-size" : "10px",
  	        "font-color" : "#DDD",
         },
         "values":min_year+":"+max_year
@@ -285,16 +285,16 @@ function display_pop_chart(object1,object2){
         plot:{
           stacked:true
         },
-        "background-color":"#424242",
+        "background-color":"#242426",
         "title":{
-          "text": "Dano causado/PIB",
+          "text": "Daño causado/PIB",
       "font-size" : "18px",
    	   "font-color" : "#DDD",
         },
         "scale-x": {
           "label":{
             "text":object1.COUNTRY +" , " +  object2.COUNTRY,
-            "font-size" : "18px",
+            "font-size" : "10px",
    	        "font-color" : "#DDD",
           },
           "values":min_year+":"+max_year

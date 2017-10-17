@@ -1,9 +1,46 @@
-
+body {
+	background: #242426;
+}
 #map{
 	position: absolute;
 	height: 100%;
 	width: 60%;
 	z-index: 1;
+}
+
+#titulo{
+   font-family: 'Roboto', sans-serif;
+   font-size: 14px;
+   color:white;
+   position: absolute;
+   background:black;
+   opacity: 0.8;
+   margin-left: 68%;
+   width: 400px;
+   text-align: center;
+   margin-top: 20%;
+}
+
+#year-value{
+	z-index: 100;
+	color:white;
+	position:absolute;
+	font-family: 'Roboto', sans-serif;
+	margin-left: 1%;
+	margin-top: 42%;
+	font-size: 30px;
+
+}
+
+#mensaje{
+	font-family: 'Roboto', sans-serif;
+	font-size: 10px;
+	color: white;
+	opacity: 0.5;
+	position: absolute;
+	margin-left: 70%;
+	margin-top: 25%;
+	
 }
 
 #slider-container{

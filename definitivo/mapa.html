@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 	<title>Mapa</title>
 	<link rel="stylesheet" type="text/css" href="css/mapa.css">
 	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
@@ -9,13 +10,23 @@
 	     zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
 	     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
 	   </script>
+	   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
 
 </head>
 <body>
-<div id="principal">
+
  <div id="map"></div>
+ <div id="titulo">
+ 	<h1>TERREMOTOS EN EL MUNDO</h1>
+ </div>
+
+ <div id="mensaje">
+ 	<h2>(Para comparar datos selecciona dos terremotos)</h2>
+ </div>
+
  <div id="PIB_Chart"></div>
-</div>
+
  <script type="text/javascript" src="d3/d3.min.js"></script>
  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
  <script type="text/javascript" src="js/dataset.js"></script>
