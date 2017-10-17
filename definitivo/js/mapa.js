@@ -1,5 +1,6 @@
 var layers_array = [];
 var countries = [];
+var objects = [];
 
 var map = L.map('map').setView([-21.351441,-71.7764874], 5);
 
@@ -33,12 +34,13 @@ function onEachFeature(feature, layer) {
 }
 
 function onClick(c){
-  countries.push(this.feature.properties.COUNTRY)
-  if (countries.length >=2) {
-    display_pib_chart(countries[countries.length - 1],
-      countries[countries.length - 2])
-    display_pop_chart(countries[countries.length - 1],
-      countries[countries.length - 2])
+  objects.push(this.feature.properties)
+  //countries.push(this.feature.properties.COUNTRY)
+  if (objects.length >=2) {
+    display_pib_chart(objects[objects.length - 1].COUNTRY,
+      objects[objects.length - 2].COUNTRY)
+    display_pop_chart(objects[objects.length - 1],
+      objects[objects.length - 2])
   };
   console.log(this.feature.properties);
 }
@@ -75,7 +77,7 @@ function display_by_year(year){
 }
 
 function update(val){
-  document.getElementById("year-value").innerHTML = val;
+  //document.getElementById("year-value").innerHTML = val;
   display_by_year(val);
 }
 
@@ -156,176 +158,67 @@ zingchart.render({
 });
 }
 
-function display_pop_chart(country1,country2){
-  var pop1 = extraer_poblacion(country1);
-  var pop2 = extraer_poblacion(country2);
-  var deaths1 = deaths_by_year(country1);
-  var deaths2 = deaths_by_year(country2);
-  var percent1 = [];
-  var percent2 = [];
-  for (var i in deaths1) {
-      percent1.push((deaths1[i]/(pop1[i]*1000))*100)
-      percent2.push((deaths2[i]/(pop2[i]*1000))*100)
+function display_pop_chart(object1,object2){
+  var pop1 = extraer_poblacion(object1.COUNTRY);
+  var pop2 = extraer_poblacion(object2.COUNTRY);
+  var deaths1 = deaths_by_year(object1.COUNTRY);
+  var deaths2 = deaths_by_year(object2.COUNTRY);
+  if (object1.YEAR == 1960) {
+    var min_index = 0;
+    var max_index = 2;
+    var min_year = "1960";
+    var max_year = "1962";
   }
-  console.log(percent1);
-  console.log(percent2);
+  else if (object1.YEAR == 2016) {
+    var min_index = 2014-1960;
+    var max_index = 2016-1960;
+    var min_year = "2014";
+    var max_year = "2016";
+  }
+  else {
+    var min_index = object1.YEAR - 1961;
+    var max_index = object1.YEAR - 1959;
+    var min_year = object1.YEAR - 1;
+    var max_year = object1.YEAR + 1;
+  };
+
+
   var myConfig = {
- 	"type" : "pop-pyramid",
- 	"background-color" : "#424242",
- 	"title" : {
- 	  "text" : "Cantidad de muertos",
- 	  "font-size" : "18px",
- 	  "font-color" : "#DDD",
- 	},
- 	"subtitle" : {
- 	  "text" : "Desde 1960-2016",
- 	  "font-size" : "14px",
- 	  "font-color" : "#999",
- 	  "padding-top" : 0,
- 	},
- 	"tooltip" : {
- 	  "visible" : false,
- 	},
- 	"legend" : {
- 	  "item" : {
- 	    "font-color" : "#FFF",
- 	    "cursor": "pointer"
- 	  },
- 	  "background-color" : "#999 #777",
- 	  "border-width" : "1px",
- 	  "border-radius" : "3px",
- 	  "border-color" : "#AAA",
- 	  "offset-x" : 50,
- 	  "offset-y" : 60,
- 	  "align": "left",
- 	  "z-index":9999
- 	},
- 	"scale-x" : {
- 	  "values" : "1960:2016:1",
- 	  "tick" : {
- 	    "line-color" : "#CCC",
- 	  },
- 	  "minor-ticks" : 2,
- 	  "minor-tick" : {
- 	    "line-color" : "#999",
- 	    "placement" : "outer",
- 	  }
- 	},
- 	"scale-y" : {
- 	  "values" : "0:20:0.00001",
- 	  "guide" : {
- 	    "line-color" : "#777",
- 	  },
- 	},
- 	"crosshair-x" : {
- 	  "line-width" : "1px",
- 	  "line-color" : "#bdbdbd",
- 	  "line-style": "dashed",
- 	  "line-segment-size": 4,
- 	  "line-gap-size":10,
- 	  "shared" : true,
- 	  "plot-label" : {
- 	    "multiple" : true,
- 	    "font-color":"#333",
- 	    "text":"%t: %v%",
- 	    "border-color" : "#666",
- 	    "padding": 10,
- 	    "font-size":14,
- 	    "border-radius":5
- 	  },
- 	  "scaleLabel":{
- 	    "background-color": "#EEE",
- 	    "font-color" : "#333",
- 	    "border-width" : "1px",
- 	    "border-color" : "#000",
- 	  },
- 	},
- 	"plot" : {
- 	  "alpha-area" : 0.5,
- 	  "line-width" : 1,
- 	  "marker" : {
- 	    "size" : 3,
- 	    "border-color" : "#FFF",
- 	    "border-width" : 1,
- 	  },
- 	  "hover-marker" : {
- 	    "size" : 5,
- 	  },
- 	},
- 	"series" : [
-		{
-			"data-side" : 1,
-			"text" : country1,
-		  "values" : percent1,
-		  "background-color" : "#69f0ae",
-		  "marker" : {
-		    "background-color" : "#64ffda",
-		    "border-color" : "#00bfa5",
-		  },
-		  "line-color" : "#00bfa5",
-		},
-		{
-		  "data-side" : 2,
-		  "text" : country2,
-			"values" : percent2,
-			"background-color" : "#7c4dff",
-			"marker" : {
-		    "background-color" : "#d500f9",
-		    "border-color" : "#aa00ff",
-		  },
-		  "line-color" : "#aa00ff",
-		},
-	],
-	"options" : {
- 	  "side-1" : {
- 	    "crosshair-x" : {
- 	      "scale-label" : {
- 	        "visible" : false,
- 	      },
- 	    },
- 	    "scale-x" : {
- 	      "visible" : false,
- 	    },
- 	    "scale-y" : {
-     	  "guide" : {
-     	    "items" : [
-     	      {
-     	        "background-color" : "#5F5F5F",
-     	      },
-     	      {
-     	        "background-color" : "#666",
-     	      },
-     	    ],
-     	  },
- 	    },
- 	  },
- 	  "side-2" : {
- 	    "subtitle" : {
- 	      "visible" : false,
- 	    },
- 	    "scale-y" : {
-     	  "guide" : {
-     	    "items" : [
-     	      {
-     	        "background-color" : "#666",
-     	      },
-     	      {
-     	        "background-color" : "#5F5F5F",
-     	      },
-     	    ],
-     	  },
- 	    },
- 	  },
- 	  "aspect" : "area",
- 	},
-};
+      type: "bar",
+      plot:{
+        stacked:true
+      },
+      "scale-x": {
+        "label":{
+          "text":object1.COUNTRY +" , " +  object2.COUNTRY
+        },
+        "values":min_year+":"+max_year
+      },
+      series: [
+        {
+          values:pop1.slice(min_index, max_index + 1),
+          stack:1,
 
-zingchart.render({
-	id : 'pop_chart',
-	data : myConfig,
-	height: '600',
-	width: '100%'
-});
+        },
+        {
+          values:deaths1.slice(min_index, max_index + 1),
+          stack:1
+        },
+        {
+          values: pop2.slice(min_index, max_index + 1),
+          stack:2
+        },
+        {
+          values:deaths2.slice(min_index, max_index + 1),
+          stack:2
+        }
+      ]
+    };
 
-
-}
+    zingchart.render({
+    	id : 'pop_chart',
+    	data : myConfig,
+    	height: "600px",
+    	width: "100%"
+    });
+  }
