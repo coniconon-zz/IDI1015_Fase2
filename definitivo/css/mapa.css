@@ -1,16 +1,28 @@
 
 #map{
 	position: absolute;
-	height: 50%;
+	height: 100%;
 	width: 60%;
-	float: left;
 	z-index: 1;
 }
 
+#slider-container{
+	position: absolute;
+	width: 60%;
+	padding: 10px 0px 10px 0px;
+	top: 95%;
+	z-index: 2;
+	background-color: rgba(0,0,0,0.4);
+}
+
+#slider{
+	width: 99%;
+}
+
 #PIB_Chart{
-position: relative;
-width: 35%;
-height: 600px;
+	position: relative;
+	width: 35%;
+	height: 600px;
 }
 
 #pop_chart{
@@ -26,17 +38,3 @@ height: 600px;
 	position: absolute;
 }
 
-#slider-container{
-position: absolute;
-width: 706.19px;
-top: 606px;
-}
-
-#slider{
-	width: 100%;
-	margin-top: 40%;
-	z-index:2;
-	position: relative;
-	margin: auto;
-
-}
