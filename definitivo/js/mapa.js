@@ -17,8 +17,9 @@ var color = d3.scaleLinear().domain([4.9,9.5])
 display_by_year(1960);
 
 function onEachFeature(feature, layer) {
+  var date = feature.properties.DATE.split(" ")
   var content = "<p>DATE <br/>"
-          + feature.properties.DATE +
+          + date[0] +
           "<br/><br/>LOCATION<br/>" +
           feature.properties.LOCATION_NAME +
             "<br/><br/>MAGNITUDE<br/>" +
@@ -86,6 +87,12 @@ function update(val){
 
 
 function display_pib_chart(country1,country2){
+  var pib1 = extraer_pib(country1);
+  var pib2 = extraer_pib(country2);
+  var pib1_round = pib1.map(function(i){return parseFloat(i.toFixed(2))});
+  var pib2_round = pib2.map(function(i){return parseFloat(i.toFixed(2))});
+  console.log(pib1_round);
+  console.log(pib2_round);
   var myConfig = {
     "background-color":"#E1EAEC #ECF2F4",
     "graphset":[
@@ -122,7 +129,7 @@ function display_pib_chart(country1,country2){
  	  "plot-label" : {
  	    "multiple" : true,
  	    "font-color":"#333",
- 	    "text":"%t: %v%",
+ 	    "text":"%t: %v",
  	    "border-color" : "#666",
  	    "padding": 10,
  	    "font-size":14,
@@ -144,7 +151,7 @@ function display_pib_chart(country1,country2){
                     "marker":{
                         "visible":false
                     },
-                    "values": extraer_pib(country1)
+                    "values": pib1_round
                 },
                 {
                     "data-side":2,
@@ -154,7 +161,7 @@ function display_pib_chart(country1,country2){
                     "marker":{
                         "visible":false
                     },
-                    "values":extraer_pib(country2)
+                    "values":pib2_round
                 }
             ]
         }
@@ -168,6 +175,8 @@ zingchart.render({
   width: "100%"
 });
 }
+
+
 
 function display_pop_chart(object1,object2){
   var pop1 = extraer_poblacion(object1.COUNTRY);
