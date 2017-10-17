@@ -250,7 +250,7 @@ function display_pop_chart(object1,object2){
     zingchart.render({
     	id : 'pop_chart',
     	data : myConfig,
-    	height: "600px",
+    	height: "200px",
     	width: "100%"
     });
   }
