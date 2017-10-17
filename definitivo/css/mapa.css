@@ -21,20 +21,25 @@
 
 #PIB_Chart{
 	position: relative;
-	width: 35%;
-	height: 600px;
+	width: 39%;
+	height: 20%;
+	float:right;
 }
 
 #pop_chart{
 	width: 50%;
 	height: 600px;
-	position: absolute;
+	position: relative;
+	margin-top: 1%;
+	float: right;
+	margin-left: 40%;
 }
 
 #damage_chart{
 	margin-left: 40%;
 	width: 40%;
 	height: 600px;
-	position: absolute;
+	position: relative;
+	float: right;
 }
 

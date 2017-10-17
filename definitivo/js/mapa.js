@@ -171,7 +171,7 @@ function display_pib_chart(country1,country2){
 zingchart.render({
   id : 'PIB_Chart',
   data : myConfig,
-  height: "600px",
+  height: "70%",
   width: "100%"
 });
 }
@@ -250,7 +250,7 @@ function display_pop_chart(object1,object2){
     zingchart.render({
     	id : 'pop_chart',
     	data : myConfig,
-    	height: "200px",
+    	height: "50%",
     	width: "100%"
     });
   }
@@ -327,7 +327,8 @@ function display_pop_chart(object1,object2){
       zingchart.render({
       	id : 'damage_chart',
       	data : myConfig,
-      	height: "600px",
-      	width: "100%"
+      	height: "50%",
+      	width: "100%",
+        padding:"10px"
       });
     }
