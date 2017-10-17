@@ -2,7 +2,7 @@ var layers_array = [];
 var countries = [];
 var objects = [];
 
-var map = L.map('map').setView([-21.351441,-71.7764874], 5);
+var map = L.map('map').setView([16.906346, 23.370259], 3);
 
 var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>contributors, &copy; <a href="http://carto.com/attributions">CARTO</a>'
@@ -41,12 +41,14 @@ function onClick(c){
       objects[objects.length - 2].COUNTRY)
     display_pop_chart(objects[objects.length - 1],
       objects[objects.length - 2])
+    display_damage_chart(objects[objects.length - 1],
+        objects[objects.length - 2])
   };
   console.log(this.feature.properties);
 }
 
 function mouseOver(c){
-  this.openPopup();
+  //this.openPopup();
 }
 
 function display_by_year(year){
@@ -77,26 +79,10 @@ function display_by_year(year){
 }
 
 function update(val){
-  //document.getElementById("year-value").innerHTML = val;
+  document.getElementById("year-value").innerHTML = val;
   display_by_year(val);
 }
 
-// define a lookup for what text should be displayed for each value in your range
-var rangeValues =
-{
-    "1960":   "1960",
-    "1965":   "1965",
-    "1970":   "1970",
-    "1975":   "1975"
-};
-
-
-$(function(){
-$('#rangeText').text(rangeValues[$('#slider').val()]);
-$('#slider').on('input change', function () {
-    $('#rangeText').text(rangeValues[$(this).val()]);
-    });
-});
 
 
 function display_pib_chart(country1,country2){
@@ -110,7 +96,9 @@ function display_pib_chart(country1,country2){
                 "aspect":"area"
             },
             "title": {
-              "text": "PIB per capita por anno"
+              "text": "Evolucion PIB per capita",
+              "font-size" : "18px",
+ 	            "font-color" : "#DDD",
             },
             "plot":{
                 "stacked":true
@@ -124,6 +112,29 @@ function display_pib_chart(country1,country2){
             "scale-y":{
                 "values":"40:102831.32148281099:100"
             },
+            "crosshair-x" : {
+ 	  "line-width" : "1px",
+ 	  "line-color" : "#bdbdbd",
+ 	  "line-style": "dashed",
+ 	  "line-segment-size": 4,
+ 	  "line-gap-size":10,
+ 	  "shared" : true,
+ 	  "plot-label" : {
+ 	    "multiple" : true,
+ 	    "font-color":"#333",
+ 	    "text":"%t: %v%",
+ 	    "border-color" : "#666",
+ 	    "padding": 10,
+ 	    "font-size":14,
+ 	    "border-radius":5
+ 	  },
+ 	  "scaleLabel":{
+ 	    "background-color": "#EEE",
+ 	    "font-color" : "#333",
+ 	    "border-width" : "1px",
+ 	    "border-color" : "#000",
+ 	  },
+ 	},
             "series":[
                 {
                     "data-side":1,
@@ -188,29 +199,41 @@ function display_pop_chart(object1,object2){
       plot:{
         stacked:true
       },
+      "background-color":"#424242",
+      "title":{
+        "text": "Muertos por Terremoto/Poblacion",
+    "font-size" : "18px",
+ 	   "font-color" : "#DDD",
+      },
       "scale-x": {
         "label":{
-          "text":object1.COUNTRY +" , " +  object2.COUNTRY
+          "text":object1.COUNTRY +" , " +  object2.COUNTRY,
+          "font-size" : "18px",
+ 	        "font-color" : "#DDD",
         },
         "values":min_year+":"+max_year
       },
+
       series: [
         {
           values:pop1.slice(min_index, max_index + 1),
           stack:1,
-
+          "background-color": "#0078FF",
         },
         {
           values:deaths1.slice(min_index, max_index + 1),
-          stack:1
+          stack:1,
+          "background-color": "#FF2700",
         },
         {
           values: pop2.slice(min_index, max_index + 1),
-          stack:2
+          stack:2,
+          "background-color": "#17FF00",
         },
         {
           values:deaths2.slice(min_index, max_index + 1),
-          stack:2
+          stack:2,
+          "background-color": "#FF2700",
         }
       ]
     };
@@ -222,3 +245,80 @@ function display_pop_chart(object1,object2){
     	width: "100%"
     });
   }
+
+  function display_damage_chart(object1,object2){
+    var pop1 = extraer_poblacion(object1.COUNTRY);
+    var pop2 = extraer_poblacion(object2.COUNTRY);
+    var damage1 = damage_by_year(object1.COUNTRY);
+    var damage2 = damage_by_year(object2.COUNTRY);
+    if (object1.YEAR == 1960) {
+      var min_index = 0;
+      var max_index = 2;
+      var min_year = "1960";
+      var max_year = "1962";
+    }
+    else if (object1.YEAR == 2016) {
+      var min_index = 2014-1960;
+      var max_index = 2016-1960;
+      var min_year = "2014";
+      var max_year = "2016";
+    }
+    else {
+      var min_index = object1.YEAR - 1961;
+      var max_index = object1.YEAR - 1959;
+      var min_year = object1.YEAR - 1;
+      var max_year = object1.YEAR + 1;
+    };
+
+
+    var myConfig = {
+        type: "bar",
+        plot:{
+          stacked:true
+        },
+        "background-color":"#424242",
+        "title":{
+          "text": "Dano causado/PIB",
+      "font-size" : "18px",
+   	   "font-color" : "#DDD",
+        },
+        "scale-x": {
+          "label":{
+            "text":object1.COUNTRY +" , " +  object2.COUNTRY,
+            "font-size" : "18px",
+   	        "font-color" : "#DDD",
+          },
+          "values":min_year+":"+max_year
+        },
+
+        series: [
+          {
+            values:pop1.slice(min_index, max_index + 1),
+            stack:1,
+            "background-color": "#0078FF",
+          },
+          {
+            values:damage1.slice(min_index, max_index + 1),
+            stack:1,
+            "background-color": "#FF2700",
+          },
+          {
+            values: pop2.slice(min_index, max_index + 1),
+            stack:2,
+            "background-color": "#17FF00",
+          },
+          {
+            values:damage2.slice(min_index, max_index + 1),
+            stack:2,
+            "background-color": "#FF2700",
+          }
+        ]
+      };
+
+      zingchart.render({
+      	id : 'damage_chart',
+      	data : myConfig,
+      	height: "600px",
+      	width: "100%"
+      });
+    }

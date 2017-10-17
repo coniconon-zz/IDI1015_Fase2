@@ -10,6 +10,37 @@ for (var i in data_pib){
 }
 return l
 }
+function sum(arr) {
+  var suma = 0;
+    for (var i in arr) {
+      if (arr[i] != "sin dato") {
+      suma += parseFloat(arr[i]);
+      };
+    }
+    return suma;
+}
+
+function damage_by_year(country){
+  var years = {};
+  var l = []
+  for(var i in data.features){
+    if (data.features[i].properties.COUNTRY == country){
+      l.push(data.features[i].properties)
+    };
+  }
+  for (var y = 1960; y < 2017; y++) {
+    var terremotos = l.filter(function(i){return i.YEAR == y});
+    var damage = terremotos.map(function(i){return i.DAMAGE});
+    years[y] = sum(damage);
+  }
+  var keys = Object.keys(years);
+  var values = [];
+  for (key in keys){
+    values.push(years[keys[key]]);
+  }
+return values;
+}
+console.log(damage_by_year("CHILE"));
 
 var data_pib = [{"Unnamed: 0": 0, "Country Name": "Aruba", "Country Code": "ABW", "Indicator Name": "GDP per capita (current US$)", "Indicator Code": "NY.GDP.PCAP.CD", "1960": "sin dato", "1961": "sin dato", "1962": "sin dato", "1963": "sin dato", "1964": "sin dato", "1965": "sin dato", "1966": "sin dato", "1967": "sin dato", "1968": "sin dato", "1969": "sin dato", "1970": "sin dato", "1971": "sin dato", "1972": "sin dato", "1973": "sin dato", "1974": "sin dato", "1975": "sin dato", "1976": "sin dato", "1977": "sin dato", "1978": "sin dato", "1979": "sin dato", "1980": "sin dato", "1981": "sin dato", "1982": "sin dato", "1983": "sin dato", "1984": "sin dato", "1985": "sin dato", "1986": "sin dato", "1987": "sin dato", "1988": "sin dato", "1989": "sin dato", "1990": "sin dato", "1991": "sin dato", "1992": "sin dato", "1993": "sin dato", "1994": 17342.471939574498, "1995": 16441.7906361916, "1996": 16585.195530726298, "1997": 17926.5728361165, "1998": 19081.351656125, "1999": 19356.2033894901, "2000": 20620.7006259175, "2001": 20670.6556635493, "2002": 20434.2994364477, "2003": 20834.5101990131, "2004": 22567.8249248908, "2005": 23302.8319880055, "2006": 24014.944267050098, "2007": 25921.026051997997, "2008": 27546.8993898034, "2009": 24631.4348604167, "2010": 24271.9404205267, "2011": 25324.7203624669, "2012": "sin dato", "2013": "sin dato", "2014": "sin dato", "2015": "sin dato", "2016": "sin dato", "Unnamed: 61": "sin dato"},
 {"Unnamed: 0": 1, "Country Name": "Afghanistan", "Country Code": "AFG", "Indicator Name": "GDP per capita (current US$)", "Indicator Code": "NY.GDP.PCAP.CD", "1960": 59.7773265083934, "1961": 59.87815280894711, "1962": 58.4928738323479, "1963": 78.78275803628921, "1964": 82.2084438594401, "1965": 101.290471274167, "1966": 137.899361896954, "1967": 161.32200008848102, "1968": 129.506653844251, "1969": 129.798541408375, "1970": 157.187422389233, "1971": 160.372835554154, "1972": 136.117014381199, "1973": 144.110318929266, "1974": 174.94203831954, "1975": 187.975604013726, "1976": 199.026172729051, "1977": 226.005343759305, "1978": 249.287386261794, "1979": 277.900741665078, "1980": 274.880858701521, "1981": 266.49304180870496, "1982": "sin dato", "1983": "sin dato", "1984": "sin dato", "1985": "sin dato", "1986": "sin dato", "1987": "sin dato", "1988": "sin dato", "1989": "sin dato", "1990": "sin dato", "1991": "sin dato", "1992": "sin dato", "1993": "sin dato", "1994": "sin dato", "1995": "sin dato", "1996": "sin dato", "1997": "sin dato", "1998": "sin dato", "1999": "sin dato", "2000": "sin dato", "2001": 117.40969079495501, "2002": 187.845094955388, "2003": 198.728543552291, "2004": 219.14135278546505, "2005": 250.29412990949, "2006": 272.563077018147, "2007": 369.835795969823, "2008": 373.36111630003603, "2009": 445.893297923744, "2010": 553.300289383064, "2011": 603.53702306241, "2012": 669.009050888028, "2013": 631.7449706415271, "2014": 612.069651391198, "2015": 584.025902055779, "2016": 561.778746269502, "Unnamed: 61": "sin dato"},
