@@ -8,6 +8,12 @@ body {
 	z-index: 1;
 }
 
+img {
+	z-index: 5;
+	position: absolute;
+	margin-left: 47%;
+}
+
 #titulo{
    font-family: 'Roboto', sans-serif;
    font-size: 14px;
@@ -23,18 +29,18 @@ body {
 
 #year-value{
 	z-index: 100;
-	color:white;
+	color: rgba(255, 255, 255, 0.4);
 	position:absolute;
 	font-family: 'Roboto', sans-serif;
 	margin-left: 1%;
-	margin-top: 42%;
-	font-size: 30px;
+	margin-top: 35%;
+	font-size: 48px;
 
 }
 
 #mensaje{
-	font-family: 'Roboto', sans-serif;
-	font-size: 10px;
+	font-family: 'Roboto Light', sans-serif;
+	font-size: 14;
 	color: white;
 	opacity: 0.5;
 	position: absolute;
