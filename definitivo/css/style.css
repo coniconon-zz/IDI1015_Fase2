@@ -1,7 +1,5 @@
-
 body {
   background: black;
-  text-align: center;
 }
 
 #logo {
@@ -10,11 +8,9 @@ body {
   font-weight: 400;
   text-align:center;
   margin-top: 22%;
-  animation: modal 40s 0.5s backwards;
+  animation: modal 32s 0.5s backwards;
   visibility: hidden;
   opacity: 0;
-  position: absolute;
-
 }
 
 span {
@@ -24,14 +20,17 @@ span {
   color: white;
 }
 
-h3{
+p {
   font-family: 'Roboto', sans-serif;
-  left:28%;
+  font-size: 20px;
+  width: 100%;
   animation: modal 20s 25s backwards;
   visibility: hidden;
   opacity: 0;
   color: white;
   position: absolute;
+  text-align: center;
+  display: inline-block;
 }
 
 @keyframes modal {
@@ -43,43 +42,29 @@ h3{
 }
 
 #audifonos {
-	color:white;
-	font-family: 'Roboto', sans-serif;
-	font-size: 10px;
+  color:white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
   font-weight: 300;
-	text-align:center;
-	opacity:0.3;
-	margin-top:22%;
+  text-align:center;
+  opacity:0.3;
+  margin-top:20%;
 }
 
-#segundo-texto {
-  text-align: center;
-  margin-top: 20%;
-}
-
-#map{
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
 
 /*Botón*/
-#cerrar {
-    display: none;
-}
 
-#cerrar + label {
+.button {
     position: absolute;
     color: #fff;
+    border: none;
     font-size: 16px;
+    text-decoration: none;
     z-index: 5;
     background: #0D8ED5;
-    height: 40px;
-    width: 150px;
-    padding: 10px 12px;
-    line-height: 35px;
+    margin: 4px 2px;
+    padding: 20px;
+    display: inline-block;
     border-radius: 12px;
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -87,11 +72,7 @@ h3{
     top: 75%;
     cursor: pointer;
     
-    animation: modal 0.2s 30s forwards;
+    animation: modal 1s 30s forwards;
     visibility: hidden;
     opacity: 0;
-}
-
-#cerrar:checked + label, #cerrar:checked ~ .introduccion {
-    display: none;
 }
