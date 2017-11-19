@@ -1,0 +1,50 @@
+body{
+	background: black;
+}
+
+h1 {
+	font-size: 20px;
+	text-align: center;
+	color: white;
+}
+
+.terremoto1 {
+	display: none;
+}
+
+.terremoto2 {
+	display: none;
+}
+
+.terremoto3 {
+	display: none;
+}
+
+.terremoto4 {
+	display: none;
+}
+
+.terremoto5 {
+	display: none;
+}
+
+.terremoto6 {
+	display: none;
+}
+
+.terremoto7 {
+	display: none;
+}
+
+.terremoto8 {
+	display: none;
+}
+
+.terremoto9 {
+	display: none;
+}
+
+.terremoto10 {
+	display: none;
+}
+

@@ -1,0 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:700italic);
+body {
+  background-color: black;
+}
+#countdown {
+  font-family: 'Roboto Condensed', sans-serif;
+  position: absolute;
+  color: white;
+  font-size: 5em;
+ }
