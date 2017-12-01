@@ -188,7 +188,7 @@ var gcolor = gen();
 
 function disminur(ob,gen){
 
-    var delta = gen.next().value*(ob.DEATHS/10)
+    var delta = Math.round(gen.next().value*(ob.DEATHS/10))
       return delta
 
 }
@@ -197,15 +197,16 @@ var color = d3.scaleLinear().domain([2226,242419])
       .interpolate(d3.interpolateHcl)
       .range([d3.rgb("#fffda8"), d3.rgb('#FF2700')]);
 
+
 $(document).ready(function() {
+
 gcolor.next().value;
-  $(".terremoto1").text(terremotos[0].LOCATION_NAME +": 0");
+  $(".terremoto1 > #text").text(terremotos[0].LOCATION_NAME);
     $(".terremoto1").addClass("text");
     $(".terremoto1").fadeIn(1500);
 
     var i = setInterval(function(){
-      $(".terremoto1").text(terremotos[0].LOCATION_NAME +": "
-      +String(disminur(terremotos[0], g1)));
+      $(".terremoto1 > #number").text(String(disminur(terremotos[0], g1)));
     }, 1000)
 
     $("#left").css("background", color(terremotos[0].DEATHS));
@@ -218,7 +219,7 @@ gcolor.next().value;
 
 $(document).ready(function() {
 
-  $(".terremoto2").text(terremotos[1].LOCATION_NAME +": 0");
+  $(".terremoto2 > #text").text(terremotos[1].LOCATION_NAME);
     $(".terremoto2").addClass("text");
     setTimeout(function() {
         $(".terremoto2").fadeIn(1500);
@@ -229,8 +230,7 @@ $(document).ready(function() {
         }
 
         var i = setInterval(function(){
-          $(".terremoto2").text(terremotos[1].LOCATION_NAME +": "
-          +String(disminur(terremotos[1], g2)));
+          $(".terremoto2 > #number").text(String(disminur(terremotos[1], g2)));
 
         }, 1000);
 
@@ -242,7 +242,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-  $(".terremoto3").text(terremotos[2].LOCATION_NAME +": 0");
+  $(".terremoto3 > #text").text(terremotos[2].LOCATION_NAME);
     $(".terremoto3").addClass("text");
   setTimeout(function() {
         $(".terremoto3").fadeIn(1500);
@@ -252,8 +252,7 @@ $(document).ready(function() {
           $("#right").css("background", color(terremotos[2].DEATHS));
         }
         var i = setInterval(function(){
-          $(".terremoto3").text(terremotos[2].LOCATION_NAME +": "
-          +String(disminur(terremotos[2], g3)));
+          $(".terremoto3 > #number").text(String(disminur(terremotos[2], g3)));
 
 
         }, 1000);
@@ -264,18 +263,19 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $(".terremoto4").text(terremotos[3].LOCATION_NAME +": 0");
+  $(".terremoto4 > #text").text(terremotos[3].LOCATION_NAME);
     $(".terremoto4").addClass("text");
     setTimeout(function() {
+
         $(".terremoto4").fadeIn(1500);
         if (gcolor.next().value == 4) {
           console.log("4");
+
           $("#left").css("background", color(terremotos[3].DEATHS));
           $("#right").css("background", color(terremotos[3].DEATHS));
         }
-        var i = setInterval(function(){    
-          $(".terremoto4").text(terremotos[3].LOCATION_NAME +": "
-          +String(disminur(terremotos[3], g4)));
+        var i = setInterval(function(){
+          $(".terremoto4 > #number").text(String(disminur(terremotos[3], g4)));
 
         }, 1000);
     },30000);
@@ -284,7 +284,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  $(".terremoto5").text(terremotos[4].LOCATION_NAME +": 0");
+  $(".terremoto5 > #text").text(terremotos[4].LOCATION_NAME);
     $(".terremoto5").addClass("text");
      setTimeout(function() {
         $(".terremoto5").fadeIn(1500);
@@ -294,8 +294,7 @@ $(document).ready(function() {
           $("#right").css("background", color(terremotos[4].DEATHS));
         }
         var i = setInterval(function(){
-          $(".terremoto5").text(terremotos[4].LOCATION_NAME +": 0"
-          +String(disminur(terremotos[4], g5)));
+          $(".terremoto5 > #number").text(String(disminur(terremotos[4], g5)));
           ;
         }, 1000);
     },40000);
@@ -304,25 +303,24 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  $(".terremoto6").text(terremotos[5].LOCATION_NAME +": 0");
+  $(".terremoto6 > #text").text(terremotos[5].LOCATION_NAME);
     $(".terremoto6").addClass("text");
     setTimeout(function() {
         $(".terremoto6").fadeIn(1500);
         if (gcolor.next().value == 6) {
-          console.log("3");
+          console.log("6");
           $("#left").css("background", color(terremotos[5].DEATHS));
           $("#right").css("background", color(terremotos[5].DEATHS));
         }
         setInterval(function(){
-          $(".terremoto6").text(terremotos[5].LOCATION_NAME +": "
-          +String(disminur(terremotos[5], g6)));
+          $(".terremoto6 > #number").text(String(disminur(terremotos[5], g6)));
 
         }, 1000);
     },50000);
 });
 
 $(document).ready(function() {
-  $(".terremoto7").text(terremotos[6].LOCATION_NAME + ": 0");
+  $(".terremoto7 > #text").text(terremotos[6].LOCATION_NAME);
     $(".terremoto7").addClass("text");
     setTimeout(function() {
         $(".terremoto7").fadeIn(1500);
@@ -332,8 +330,7 @@ $(document).ready(function() {
           $("#right").css("background", color(terremotos[6].DEATHS));
         }
         var i = setInterval(function(){
-          $(".terremoto7").text(terremotos[6].LOCATION_NAME +": "
-          +String(disminur(terremotos[6], g7)));
+          $(".terremoto7 > #number").text(String(disminur(terremotos[6], g7)));
 
         }, 1000);
     },60000);
@@ -341,7 +338,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  $(".terremoto8").text(terremotos[7].LOCATION_NAME+": 0");
+  $(".terremoto8 > #text").text(terremotos[7].LOCATION_NAME);
     $(".terremoto8").addClass("text");
     setTimeout(function() {
         $(".terremoto8").fadeIn(1500);
@@ -351,15 +348,14 @@ $(document).ready(function() {
           $("#right").css("background", color(terremotos[7].DEATHS));
         }
         setInterval(function(){
-          $(".terremoto8").text(terremotos[7].LOCATION_NAME +": "
-          +String(disminur(terremotos[7], g8)));
+          $(".terremoto8 > #number").text(String(disminur(terremotos[7], g8)));
         }, 1000);
     },70000);
 });
 
 
 $(document).ready(function() {
-  $(".terremoto9").text(terremotos[8].LOCATION_NAME +": 0");
+  $(".terremoto9 > #text").text(terremotos[8].LOCATION_NAME);
     $(".terremoto9").addClass("text");
     setTimeout(function() {
       if (gcolor.next().value == 9) {
@@ -369,8 +365,7 @@ $(document).ready(function() {
       }
         $(".terremoto9").fadeIn(1500);
         setInterval(function(){
-          $(".terremoto9").text(terremotos[8].LOCATION_NAME +": "
-          +String(disminur(terremotos[8], g9)));
+          $(".terremoto9 > #number").text(String(disminur(terremotos[8], g9)));
 
         }, 1000);
     },80000);
@@ -378,7 +373,8 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $(".terremoto10").text(terremotos[9].LOCATION_NAME +": 0");
+
+  $(".terremoto10 > #text").text(terremotos[9].LOCATION_NAME);
     $(".terremoto10").addClass("text");
     setTimeout(function() {
       if (gcolor.next().value == 10) {
@@ -388,9 +384,12 @@ $(document).ready(function() {
       }
         $(".terremoto10").fadeIn(1500);
         setInterval(function(){
-          $(".terremoto10").text(terremotos[9].LOCATION_NAME +": "
-          +String(disminur(terremotos[9], g10)));
-
+          $(".terremoto10 > #number").text(String(disminur(terremotos[9], g10)));
+          console.log($(".terremoto10 > #number").text());
+          if ($(".terremoto10 > #number").text() == 558) {
+            console.log("reset");
+            window.location.reload(false);
+          }
         }, 1000);
     },90000);
 
